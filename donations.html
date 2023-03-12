@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VBCI Heaven on Earth Sanctuary</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="path/to/atropos.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        label {
+            color: #111;
+            display: block;
+            margin-top: -30px;
+            width: 100%;
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            display: grid;
+            }
+
+        #number {
+            width: 30%;
+            margin-left: 50px;
+            padding: 12px 20px;
+            justify-content: center;
+            border-radius: 5px;
+            transition: width 0.4s ease-in-out;
+        }
+
+        #number:focus {
+            background-color: lightgreen;
+            width: 80vw;
+        }
+
+        .script {
+            display: grid;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/index.html">
+            <img src="/logo.png" alt="Logo" width="40" height="34" class="d-inline-block align-text-top">
+          </a>
+          <div class="justify-content-end">VBCI Heaven on Earth Sanctuary</div>
+        </div>
+      </nav>
+
+      <!-- WELCOME PAGE-->
+    <div class="banner">
+      <video id="background-video" autoplay loop muted poster="https://cdn.classfmonline.com/cfoZ41e/imagelib/thumbs/11034071.jpg">
+        <source src="/vid2.mp4" type="video/mp4">
+      </video>
+      <div class="content">
+      <h1>VBCI</h1>
+      <h2>Heaven on Earth Sanctuary</h2>
+      </div>
+    </div>
+
+
+    <!-- Payment -->
+    <!-- <label for="motive">Motive of donation</label> <br><br>
+    <input type="text" name="motive" id="text"> <br><br> -->
+    <div class="container">
+        <label for="amount">Amount to be donated</label> <br><br>
+    <input type="number" name="amount" id="number"> <br><br>
+    </div>
+
+    <div class="script">
+        
+    <!-- Replace "test" with your own sandbox Business account app client ID -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AbV15f4j2e8b_bTwsAYYA5s6KAThzvkIes6GT8Herr7u7uG7IWDbQM9VIcRiokgKF0jbzWFaHIbuQPM5&currency=USD"></script>
+  <!-- Set up a container element for the button -->
+  <div id="paypal-button-container"></div>
+  <script>
+
+    const amountElement = document.getElementById('number');
+    // const motiveElem = document.getElementById('text');
+    console.log(amountElement.value)
+    // console.log(motiveElem.value)
+
+    paypal.Buttons({
+      // Sets up the transaction when a payment button is clicked
+      createOrder: (data, actions) => {
+        return actions.order.create({
+          purchase_units: [{
+            // name: { value: motiveElem.value, },
+            amount: {
+              value: amountElement.value, // Can also reference a variable or function
+            }
+          }]
+        });
+      },
+      // Finalize the transaction after payer approval
+      onApprove: (data, actions) => {
+        return actions.order.capture().then(function(orderData) {
+          // Successful capture! For dev/demo purposes:
+          console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+          const transaction = orderData.purchase_units[0].payments.captures[0];
+          alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+          // When ready to go live, remove the alert and show a success message within this page. For example:
+          // const element = document.getElementById('paypal-button-container');
+          // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+          // Or go to another URL:  actions.redirect('thank_you.html');
+        });
+      }
+    }).render('#paypal-button-container');
+  </script>
+    </div>
+
+      <!-- FOOTER -->
+      <footer id="footer">
+        <div class="container">
+            <div class="sec aboutus">
+                <h2>About Us</h2>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus illum consectetur dicta optio facere, necessitatibus consequuntur itaque quod maiores consequatur autem dolores repellat aliquam aut magni illo? Eligendi, ipsum maxime.</p>
+                <ul class="sci">
+                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram"  aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+            <div class="sec quickLinks">
+                <h2>Quick Links</h2>
+                <ul>
+                    <li><a href="#footer">About</a></li>
+                    <li><a href="/donations.html">Donations</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </div>
+            <div class="sec contact">
+                <h2>Contact Info</h2>
+                <ul class="info">
+                        <span><i class="fa fa-phone" aria-hidden="true"></i></span>
+                        <p><a href="tel:123456789">+1 234 567 8900</a><br>
+                            <a href="tel:123456789">+1 234 567 8900</a>
+                        </p>
+                    </li>
+                    <li>
+                        <span><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                        <p><a href="mailto:something@gmail.com">something@gmail.com</a></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <div class="copyrightText">
+        <p>Copyright &copy; 2020 Wolf Inc. All Rights Reserved.</p>
+    </div>
+
+
+
+      <script src="path/to/atropos.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>
